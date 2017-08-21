@@ -35,6 +35,6 @@ class CreateBooklistsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('booklists');
-        Schema::dropIfExists('booklists');
+        Schema::dropIfExists('booklist_booktitle');
     }
 }
