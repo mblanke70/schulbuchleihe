@@ -17,12 +17,12 @@ class CreateBooktitlesTable extends Migration
             
             $table->increments('id');
             $table->string('titel');
-            $table->string('verlag');
-            $table->float('preis', 4, 2);
+            $table->string('verlag')->nullable();
+            $table->float('preis', 4, 2)->nullable();
             $table->string('kennung');
-            $table->integer('bestand');
-            $table->integer('ausgeliehen');
-            $table->float('leihgebuehr', 4, 2);
+            $table->integer('bestand')->nullable();
+            $table->integer('ausgeliehen')->nullable();
+            $table->float('leihgebuehr', 4, 2)->nullable();
             $table->string('isbn');
 
             $table->timestamps('');
