@@ -11,13 +11,26 @@
 |
 */
 
-use App\Booktitle;
-
+/*
+ | Home
+ */
 Route::get('/', function () {
     return redirect()->route('buchtitel.index');
 });
 
 
 Route::resource('buchtitel', 'BooktitleController');
+
+
+/*
+ | Bücherlisten
+ */
+Route::delete('buchlisten/detach/{booklist}/{booktitle}', 'BooklistController@detach');
+Route::post('buchlisten/attach/{id}', 'BooklistController@attach');
 Route::resource('buchlisten', 'BooklistController');
+
+
+/*
+ | Bücher
+ */
 Route::resource('buecher', 'BookController');

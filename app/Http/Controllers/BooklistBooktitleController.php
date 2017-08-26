@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Booklist;
-use App\Booktitle;
 
-
-class BooklistController extends Controller
+class BooklistBooktitleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +13,7 @@ class BooklistController extends Controller
      */
     public function index()
     {
-        $buchlisten = Booklist::all();
-
-        return view('booklists/index', compact('buchlisten'));
+        //
     }
 
     /**
@@ -50,18 +45,7 @@ class BooklistController extends Controller
      */
     public function show($id)
     {
-        $booklist = Booklist::findOrFail($id);
-        $booktitlesAttached = $booklist->booktitles;
-
-        $booktitlesNotAttached = Booktitle::all()->diff($booktitlesAttached);
-
-        /*
-        $booktitlesNotAttached = Booktitle::whereDoesntHave('booklists', function($query) use ($id) {
-            $query->where('booklist_id', $id);
-        })->get();
-        */
-
-        return view('booklists/show', compact('booklist', 'booktitlesAttached', 'booktitlesNotAttached'));
+        //
     }
 
     /**
@@ -82,7 +66,7 @@ class BooklistController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -96,21 +80,5 @@ class BooklistController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-
-    public function attach(Request $request, $id)
-    {
-        Booklist::find($id)->booktitles()->attach($request->bid);
-
-        return redirect()->route('buchlisten.show', ['id' => $id]);
-    }
-
-
-    public function detach($booklist_id, $booktitle_id)
-    {
-        Booklist::find($booklist_id)->booktitles()->detach($booktitle_id);
-
-        return redirect()->route('buchlisten.show', ['id' => $booklist_id]);
     }
 }

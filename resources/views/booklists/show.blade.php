@@ -9,31 +9,34 @@
 
         <tr>
             <th>Jahrgang</th>
-            <td> {{ $buchliste->jahrgang }} </td>
+            <td>{{ $booklist->jahrgang }}</td>
         </tr>
         <tr>
             <th>Schuljahr</th>
-            <td> {{ $buchliste->schuljahr }} </td>
+            <td>{{ $booklist->schuljahr }}</td>
         </tr>
 
     </table>
 
 
-    <form action="{{ url('buchlisten/') }}" method="POST">
+    <form action="{{ url('buchlisten/attach', [$booklist->id]) }}" method="POST">
     
         {{ csrf_field() }}
 
         <div class="form-group">
-            <label for="buchtitel-titel">Neuer Buchtitel</label>
+            <label for="buchtitel-titel">Buchtitel hinzufügen</label>
 
             <div>
-                <select class="form-control" id="buchtitel-titel">
-                    <option>1</option>
-                    <option>2</option>
+                <select name="bid" class="form-control" id="buchtitel-titel">
+                
+        @foreach ($booktitlesNotAttached as $bt)
+            <option value="{{ $bt->id }}">{{ $bt->titel }}</option>
+        @endforeach
+
                 </select>
             </div>
 
-            <a class="btn btn-success" href="{{ url('buchlisten/edit') }}">Hinzufügen</a>
+            <button type="submit">Hinzufügen</button>
         </div>
 
     </form>
@@ -50,14 +53,22 @@
             <th>Kennung</th>
         </tr>
 
-    @foreach ($buecher as $b)
+    @foreach ($booktitlesAttached as $bt)
 
         <tr>
-            <td> {{ $b->id }} </td>
-            <td> {{ $b->titel }} </td>
-            <td> {{ $b->verlag }} </td>
-            <td> {{ $b->preis }} </td>
-            <td> {{ $b->kennung }} </td>
+            <td>{{ $bt->id }}</td>
+            <td>{{ $bt->titel }}</td>
+            <td>{{ $bt->verlag }}</td>
+            <td>{{ $bt->preis }}</td>
+            <td>{{ $bt->kennung }}</td>
+            <td>
+                <form action="{{ url('buchlisten/detach', [$booklist->id, $bt->id]) }}" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field('DELETE') }}
+
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
         </tr>
 
     @endforeach

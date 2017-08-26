@@ -8,11 +8,11 @@ class Booktitle extends Model
 {  
     public function books()
     {
-    	return $this->hasMany(Book::class);
+    	return $this->hasMany('App\Book');
     }
 
     public function booklists()
     {
-    	return $this->belongsToMany(Booklist::class);
+    	return $this->belongsToMany('App\Booklist');
     }  
 }

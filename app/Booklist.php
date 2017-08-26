@@ -8,6 +8,6 @@ class Booklist extends Model
 {
     public function booktitles()
     {
-    	return $this->belongsToMany(Booktitle::class);
+    	return $this->belongsToMany('App\Booktitle');
     } 
 }
