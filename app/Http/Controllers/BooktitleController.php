@@ -49,7 +49,8 @@ class BooktitleController extends Controller
 
         $buchtitel->save();
 
-        return redirect('booktitles/index');
+        return redirect()->route('buchtitel.index');
+        //return redirect('booktitles/index');
     }
 
     /**
@@ -98,7 +99,8 @@ class BooktitleController extends Controller
 
         $buchtitel->save();
 
-        return redirect('booktitles/index');
+        return redirect()->route('buchtitel.index');
+        //return redirect('booktitles/index');
     }
 
     /**
@@ -110,7 +112,8 @@ class BooktitleController extends Controller
     public function destroy($id)
     {
         Booktitle::findOrFail($id)->delete();
-
-        return redirect('booktitles/index');
+        
+        return redirect()->route('buchtitel.index');
+        //return redirect('booktitles/index');
     }
 }
