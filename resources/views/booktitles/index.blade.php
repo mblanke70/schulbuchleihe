@@ -19,6 +19,7 @@
         <thead>
 
             <tr>
+                <th>ID</th>
                 <th>Kennung</th>
                 <th>ISBN</th>
                 <th>Titel</th>
@@ -37,6 +38,7 @@
             @foreach ($buchtitel as $t)
             
                 <tr>
+                    <td> {{ $t->id }} </td>
                     <td> {{ $t->kennung }} </td>
                     <td> {{ $t->isbn }} </td>
                     <td>

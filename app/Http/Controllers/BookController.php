@@ -14,7 +14,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $buecher = Book::with('booktitle')->get();
+        $buecher = Book::with('booktitle')->get();  // eager loading
 
         return view('books/index', compact('buecher'));
     }

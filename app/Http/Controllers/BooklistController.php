@@ -16,7 +16,7 @@ class BooklistController extends Controller
      */
     public function index()
     {
-        $buchlisten = Booklist::all();
+        $buchlisten = Booklist::orderBy('jahrgang', 'asc')->get();
 
         return view('booklists/index', compact('buchlisten'));
     }
@@ -28,7 +28,7 @@ class BooklistController extends Controller
      */
     public function create()
     {
-        //
+        return view('booklists/create');
     }
 
     /**
@@ -39,7 +39,16 @@ class BooklistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request...
+
+        $buchliste = new Booklist;
+
+        $buchliste->jahrgang  = $request->jahrgang;
+        $buchliste->Schuljahr = $request->schuljahr;
+
+        $buchliste->save();
+
+        return redirect()->route('buchlisten.index');
     }
 
     /**
@@ -54,12 +63,6 @@ class BooklistController extends Controller
         $booktitlesAttached = $booklist->booktitles;
 
         $booktitlesNotAttached = Booktitle::all()->diff($booktitlesAttached);
-
-        /*
-        $booktitlesNotAttached = Booktitle::whereDoesntHave('booklists', function($query) use ($id) {
-            $query->where('booklist_id', $id);
-        })->get();
-        */
 
         return view('booklists/show', compact('booklist', 'booktitlesAttached', 'booktitlesNotAttached'));
     }
@@ -95,10 +98,21 @@ class BooklistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $booklist = Booklist::findOrFail($id);
+
+        $booklist->booktitles()->detach();
+        $booklist->delete();
+   
+        return redirect()->route('buchlisten.index');
     }
 
+    /**
+     * Attach the specified resource.
 
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function attach(Request $request, $id)
     {
         Booklist::find($id)->booktitles()->attach($request->bid);
@@ -107,6 +121,13 @@ class BooklistController extends Controller
     }
 
 
+    /**
+     * Detach the specified resource.
+
+     * @param  int  $booklist_id
+     * @param  int  $booktitle_id
+     * @return \Illuminate\Http\Response
+     */
     public function detach($booklist_id, $booktitle_id)
     {
         Booklist::find($booklist_id)->booktitles()->detach($booktitle_id);

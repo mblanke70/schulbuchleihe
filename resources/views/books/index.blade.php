@@ -2,6 +2,7 @@
         
 @section ('content')
 
+
 <div class="container">
     <h1>Bücher</h1>
 </div>
@@ -12,6 +13,7 @@
 
         <tr>
             <th>ID</th>
+            <th>BT-ID</th>
             <th>Titel</th>
             <th>Anschaffungsjahr</th> 
             <th>Ausgeliehen?</th>
@@ -23,6 +25,7 @@
 
         <tr>
             <td> {{ $b->id }} </td>
+            <td> {{ $b->booktitle->id }} </td>
             <td> {{ $b->booktitle->titel }} </td>
             <td> {{ $b->anschaffungsjahr }} </td>
             <td> {{ $b->ausgeliehen }} </td>
