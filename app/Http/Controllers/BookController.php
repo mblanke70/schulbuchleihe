@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Booktitle;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -26,7 +27,8 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $buchtitel = Booktitle::all();
+        return view('books/create', compact('buchtitel'));
     }
 
     /**
