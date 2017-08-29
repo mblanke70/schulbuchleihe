@@ -8,6 +8,12 @@
 </div>
 
 <div class="container">
+    <a class="btn btn-success" href="{{ url('buecher/create') }}">Neues Buch</a>
+</div>
+
+<hr />
+
+<div class="container">
 
    <table class="table">
 

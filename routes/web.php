@@ -18,7 +18,7 @@ Route::get('/', function () {
     return redirect()->route('buchtitel.index');
 });
 
-
+Route::get('buchtitel/createFromISBN/{isbn}', 'BooktitleController@createFromISBN');
 Route::resource('buchtitel', 'BooktitleController');
 
 
