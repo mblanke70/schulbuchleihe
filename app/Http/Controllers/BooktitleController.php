@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Booktitle;
 use Illuminate\Http\Request;
+
+use App\Booktitle;
 
 class BooktitleController extends Controller
 {
@@ -63,7 +64,7 @@ class BooktitleController extends Controller
         $buchtitel = Booktitle::findOrFail($id);
         $buecher = $buchtitel->books;
 
-        return view('booktitles/show', compact('buchtitel'), compact('buecher'));
+        return view('booktitles/show', compact('buchtitel', 'buecher'));
     }
 
     /**
@@ -118,6 +119,12 @@ class BooktitleController extends Controller
         return redirect()->route('buchtitel.index');
     }
 
+    /**
+     * 
+     *
+     * @param  String  $isbn ISBN-Nummer für die Suchanfrage
+     * @return \Illuminate\Http\Response
+     */
     public function createFromISBN($isbn)
     {
         $xmldoc = new \DOMDocument();

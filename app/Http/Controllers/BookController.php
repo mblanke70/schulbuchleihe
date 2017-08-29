@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Book;
 use App\Booktitle;
-use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
@@ -39,7 +40,17 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $buch = new Book;
+
+        $buch->ausgeliehen      = 0;
+        $buch->anschaffungsjahr = $request->anschaffungsjahr;
+        $buch->leihgebuehr      = $request->leihgebuehr;
+        $buch->neupreis         = $request->neupreis;
+
+        $booktitle = Booktitle::find($request->buchtitel_id);
+        $booktitle->books()->save($buch);
+
+        return redirect()->route('buecher.index');
     }
 
     /**

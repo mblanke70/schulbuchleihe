@@ -16,6 +16,7 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('booktitle_id');
+            $table->integer('kennung');
             $table->boolean('ausgeliehen')->nullable();
             $table->decimal('leihgebuehr', 4, 2)->nullable();
             $table->integer('anschaffungsjahr');
