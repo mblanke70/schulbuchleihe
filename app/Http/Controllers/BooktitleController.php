@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Booktitle;
+use \Milon\Barcode\DNS1D;
 
 class BooktitleController extends Controller
 {
