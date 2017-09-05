@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Booktitle;
 use \Milon\Barcode\DNS1D;
+use \Milon\Barcode\DNS2D;
 
 class BooktitleController extends Controller
 {
@@ -16,7 +17,7 @@ class BooktitleController extends Controller
      */
     public function index()
     {
-        $buchtitel = Booktitle::all();
+        $buchtitel = Booktitle::sortable()->paginate(8); //all();
         
         return view('booktitles/index', compact('buchtitel'));
     }

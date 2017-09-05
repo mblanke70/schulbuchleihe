@@ -19,10 +19,10 @@
         <thead>
 
             <tr>
-                <th>ID</th>
+                <th>@sortablelink('id', 'ID')</th>
                 <th>Kennung</th>
-                <th>ISBN</th>
-                <th>Titel</th>
+                <th>@sortablelink('isbn', 'ISBN')</th>
+                <th>@sortablelink('titel', 'Titel')</th>
                 <th>Verlag</th>
                 <th>Bestand</th>
                 <th>Ausgeliehen</th>
@@ -79,6 +79,8 @@
         </tbody>
 
     </table>
+
+    {{ $buchtitel->links() }}
 
 </div>
 

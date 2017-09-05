@@ -179,7 +179,11 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        /*
+         * Third Party Service Providers...
+         */
         Milon\Barcode\BarcodeServiceProvider::class,
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
     ],
 
     /*
